@@ -1,102 +1,62 @@
 
 package humanizar.alquilerprendas.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 /**
  *
  * @author Andres Santos
  */
 @Entity
-@Table(name = "Persona")
-public class Persona {
+@Table(name = "persona")
+@Inheritance(strategy = InheritanceType.JOINED)
+@Getter
+@Setter
+public class Persona implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id_persona")
+    private Integer idPersona;
 
-    @Column(nullable = false)
+    @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(nullable = false, unique = true)
-    private String cedula;
+    @Column(name = "direccion")
+    private String direccion;
 
-    @Column(nullable = false)
+    @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(nullable = false)
-    private String correo;
+    @Column(name = "email", unique = true)
+    private String email;
+    
+    @Column(name = "cedula", unique = true,  nullable = false)
+    private String cedula;
 
-    @Column(nullable = false)
-    private String direccion;
+    @Column(name = "contrasenia_hash", length = 255, nullable = false)
+    private String contraseniaHash;
+    
 
     public Persona() {
     }
 
-    public Persona(String nombre, String cedula, String telefono, String correo, String direccion) {
+    public Persona(String nombre, String telefono, String email, String direccion) {
         this.nombre = nombre;
-        this.cedula = cedula;
         this.telefono = telefono;
-        this.correo = correo;
-        this.direccion = direccion;
-    }
-
-    // Getters y Setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
+        this.email = email;
         this.direccion = direccion;
     }
 
     @Override
     public String toString() {
         return "Persona{" +
-               "id=" + id +
+               "id=" + idPersona +
                ", nombre='" + nombre + '\'' +
-               ", cedula='" + cedula + '\'' +
                ", telefono='" + telefono + '\'' +
-               ", correo='" + correo + '\'' +
+               ", correo='" + email + '\'' +
                ", direccion='" + direccion + '\'' +
                '}';
     }

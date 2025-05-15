@@ -3,20 +3,22 @@ package humanizar.alquilerprendas.model;
 
 import java.util.Date;
 import javax.persistence.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 /**
  *
  * @author Andres Santos
  */
 @Entity
-@Table(name = "Cliente")
+@Table(name = "cliente")
 @PrimaryKeyJoinColumn(name = "id_persona")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Cliente extends Persona {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
-    private Integer idCliente;
 
     @Column(name = "estado_cliente")
     private Boolean estadoCliente;
@@ -24,32 +26,4 @@ public class Cliente extends Persona {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
-
-    // Constructor
-    public Cliente() {}
-
-    // Getters y setters
-    public Integer getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public Boolean getEstadoCliente() {
-        return estadoCliente;
-    }
-
-    public void setEstadoCliente(Boolean estadoCliente) {
-        this.estadoCliente = estadoCliente;
-    }
-
-    public Date getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public void setFechaRegistro(Date fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
 }

@@ -31,6 +31,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.6.15.Final</version>
+            <type>jar</type>
         </dependency>
 
         <!-- Conector MySQL -->
@@ -39,12 +40,43 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
-
         <!-- Logger para Hibernate -->
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
             <version>3.4.3.Final</version>
         </dependency>
+        <!-- Lombok para automatizar la generación de código repetitivo -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <!-- Implementación de SLF4J para logging simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.9</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>5.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.lib</groupId>
+            <artifactId>absolutelayout</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 </project>
