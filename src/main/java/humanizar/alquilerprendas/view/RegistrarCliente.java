@@ -19,6 +19,8 @@ public class RegistrarCliente extends javax.swing.JFrame {
      */
     public RegistrarCliente() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
     LoginController login = new LoginController();
 

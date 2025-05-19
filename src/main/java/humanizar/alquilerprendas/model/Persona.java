@@ -1,10 +1,10 @@
-
 package humanizar.alquilerprendas.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
 /**
  *
  * @author Andres Santos
@@ -32,16 +32,22 @@ public class Persona implements Serializable {
 
     @Column(name = "email", unique = true)
     private String email;
-    
-    @Column(name = "cedula", unique = true,  nullable = false)
+
+    @Column(name = "cedula", unique = true, nullable = false)
     private String cedula;
 
     @Column(name = "contrasenia_hash", length = 255, nullable = false)
     private String contraseniaHash;
-    
 
     public Persona() {
     }
+    @OneToOne(mappedBy = "persona")
+    private Empleado empleado;
+    
+    @OneToOne
+    @JoinColumn(name = "id_persona")
+    private Persona persona;
+    
 
     public Persona(String nombre, String telefono, String email, String direccion) {
         this.nombre = nombre;
@@ -52,12 +58,12 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" +
-               "id=" + idPersona +
-               ", nombre='" + nombre + '\'' +
-               ", telefono='" + telefono + '\'' +
-               ", correo='" + email + '\'' +
-               ", direccion='" + direccion + '\'' +
-               '}';
+        return "Persona{"
+                + "id=" + idPersona
+                + ", nombre='" + nombre + '\''
+                + ", telefono='" + telefono + '\''
+                + ", correo='" + email + '\''
+                + ", direccion='" + direccion + '\''
+                + '}';
     }
 }
