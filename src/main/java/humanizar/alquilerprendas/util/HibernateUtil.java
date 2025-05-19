@@ -44,6 +44,21 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Cliente.class);
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Role.class);
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.model.UsuarioRol.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Prenda.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Categoria.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Empleado.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Genero.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Material.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Talla.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.Tipo.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.UsuarioRolId.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.dto.PrendaDTO.class);                
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.ServicioAlquiler.class);                
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.AlquilerPrenda.class);
+
+
+
+
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                         .applySettings(configuration.getProperties()).build();

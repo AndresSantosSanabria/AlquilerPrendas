@@ -26,4 +26,9 @@ public class Cliente extends Persona {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
+    
+    @OneToOne
+    @JoinColumn(name = "persona_id")
+    private Persona persona;
+
 }
