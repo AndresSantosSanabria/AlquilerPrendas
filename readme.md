@@ -30,10 +30,9 @@ alquilerprendas/
 ├── src/                       # Código fuente
 └── target/                    # Archivos compilados y empaquetados
     ├── classes/               # Clases compiladas
-    │   ├── META-INF/
-    │   │   └── persistence.xml # Configuración de JPA
-    │   └── humanizar/         # Paquetes de la aplicación
-    └── AlquilerPrendas1-1.0-SNAPSHOT.jar # Archivo JAR ejecutable
+       ├── META-INF/
+       │   └── persistence.xml # Configuración de JPA
+       └── humanizar/         # Paquetes de la aplicación
 ```
 
 ## Instalación
@@ -46,11 +45,7 @@ alquilerprendas/
 
 ### Pasos de Instalación
 
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/tu-usuario/alquilerprendas.git
-cd alquilerprendas
-```
+1. Clonar el repositorio
 
 2. Configurar la base de datos:
    - Inicia MySQL Server
@@ -75,11 +70,6 @@ cd alquilerprendas
 4. Compilar el proyecto:
 ```bash
 mvn clean install
-```
-
-5. Ejecutar la aplicación:
-```bash
-java -jar target/AlquilerPrendas1-1.0-SNAPSHOT.jar
 ```
 
 ## Estructura del Proyecto
@@ -107,8 +97,6 @@ El proyecto utiliza un archivo `.env` en la raíz para gestionar las variables d
    ```
 
 2. La clase `HibernateSessionManager` en el paquete `humanizar.alquilerprendas.util` se encarga de cargar estas variables de entorno y configurar la conexión a la base de datos correctamente.
-
-## Funcionalidades Principales
 
 ## Funcionalidades Principales
 
@@ -182,20 +170,3 @@ El sistema utiliza una base de datos relacional con las siguientes tablas princi
 2. Ingresar los parámetros de búsqueda
 3. Visualizar los resultados
 
-## Contribución
-
-Para contribuir al proyecto:
-
-1. Hacer fork del repositorio
-2. Crear una rama para tu funcionalidad (`git checkout -b feature/nueva-funcionalidad`)
-3. Realizar cambios y commits (`git commit -am 'Añadir nueva funcionalidad'`)
-4. Subir los cambios (`git push origin feature/nueva-funcionalidad`)
-5. Crear un Pull Request
-
-## Licencia
-
-Este proyecto está bajo la Licencia [Especificar licencia].
-
-## Contacto
-
-Para más información, contactar a [Tu nombre o equipo] en [correo electrónico].
