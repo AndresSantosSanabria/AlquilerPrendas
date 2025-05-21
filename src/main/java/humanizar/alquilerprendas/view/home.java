@@ -30,7 +30,6 @@ public class home extends javax.swing.JFrame {
         System.out.println(idUser);
         this.id=idUser;
         jtPrendas.setModel(prodContoller.cargarProductos(null, null, null, null, null));
-
     }
 
     public String obtenerFiltro(JComboBox combo) {
@@ -57,6 +56,8 @@ public class home extends javax.swing.JFrame {
         BtnAlquilar = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        BtnConsultar = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         BtnFiltros = new javax.swing.JPanel();
         BtnFiltro = new javax.swing.JLabel();
@@ -123,19 +124,56 @@ public class home extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("SALIR");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 20, -1, 40));
+
+        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        BtnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnConsultar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnConsultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        BtnConsultar.setText("CONSULTAR MIS SERVICIOS");
+        BtnConsultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BtnConsultarMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(BtnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BtnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel3.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 220, 40));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 1100, 90));
 
@@ -218,7 +256,7 @@ public class home extends javax.swing.JFrame {
         FiltroGenero.setBackground(new java.awt.Color(153, 153, 153));
         FiltroGenero.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         FiltroGenero.setForeground(new java.awt.Color(255, 255, 255));
-        FiltroGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Femenino", "Masculino", "Unisex", "Niño", "Niña", "Adolescente", "Maternidad", "Niño", "Niña", "Adolescente", "Maternidad" }));
+        FiltroGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un tipo", "Femenino", "Masculino", "Unisex", "Niño", "Niña", "Adolescente", "Maternidad" }));
         FiltroGenero.setToolTipText("Filtrar");
         jPanel1.add(FiltroGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 335, 164, 31));
 
@@ -364,6 +402,18 @@ public class home extends javax.swing.JFrame {
         jtPrendas.setModel(prodContoller.cargarProductos(null, null, null, null, null));
     }//GEN-LAST:event_QuitarFiltrosMouseClicked
 
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        Login l = new Login();
+        l.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void BtnConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnConsultarMouseClicked
+        Inicio i = new Inicio(this.id);
+        i.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnConsultarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -410,6 +460,7 @@ public class home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BtnAlquilar;
+    private javax.swing.JLabel BtnConsultar;
     private javax.swing.JLabel BtnFiltro;
     private javax.swing.JPanel BtnFiltros;
     private javax.swing.JComboBox<String> FiltroCategoria;
@@ -431,6 +482,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtPrendas;
     private javax.swing.JLabel labelGenero;

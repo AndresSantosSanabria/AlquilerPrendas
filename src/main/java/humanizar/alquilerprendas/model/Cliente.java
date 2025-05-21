@@ -1,15 +1,14 @@
-
 package humanizar.alquilerprendas.model;
 
-import java.util.Date;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
+import java.util.Date;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 /**
- *
- * @author Andres Santos
+ * Entidad Cliente que extiende de Persona
  */
 @Entity
 @Table(name = "cliente")
@@ -26,9 +25,4 @@ public class Cliente extends Persona {
     @Column(name = "fecha_registro")
     @Temporal(TemporalType.DATE)
     private Date fechaRegistro;
-    
-    @OneToOne
-    @JoinColumn(name = "persona_id")
-    private Persona persona;
-
 }

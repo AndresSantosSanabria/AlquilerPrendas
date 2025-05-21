@@ -10,7 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PrendaDTO {
-
     private Long id;
     private String color;
     private String descripcion;
@@ -18,12 +17,14 @@ public class PrendaDTO {
     private String genero;
     private String material;
     private String tipoPrenda;
-    private String pedreria;
+    private Boolean pedreria;
     private Double precio;
     private String talla;
 
-    public PrendaDTO(Long id, String color, String descripcion, String categoria, String genero,
-                     String material, String tipoPrenda, String pedreria, Double precio, String talla) {
+    // Constructor para la consulta HQL
+     public PrendaDTO(long id, String color, String descripcion, String categoria, 
+                    String genero, String material, String tipoPrenda, 
+                    boolean pedreria, double precio, String talla) {
         this.id = id;
         this.color = color;
         this.descripcion = descripcion;

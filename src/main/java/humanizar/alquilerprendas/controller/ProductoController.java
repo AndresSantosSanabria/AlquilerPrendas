@@ -5,7 +5,6 @@
 package humanizar.alquilerprendas.controller;
 
 import humanizar.alquilerprendas.dao.PrendaDao;
-import humanizar.alquilerprendas.model.Prenda;
 import humanizar.alquilerprendas.dto.PrendaDTO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -38,20 +37,20 @@ public class ProductoController {
         List<PrendaDTO> prendas = dao.obtenerResumenPrendasConFiltros(categoria, genero, material, tipo, talla);
 
         for (PrendaDTO p : prendas) {
-            Object[] fila = {
-                false, // Valor por defecto del checkbox
-                p.getId(),
-                p.getColor(),
-                p.getDescripcion(),
-                p.getCategoria(),
-                p.getGenero(),
-                p.getMaterial(),
-                p.getTipoPrenda(),
-                Boolean.TRUE.equals(p.getPedreria()) ? "Sí" : "No",
-                p.getPrecio(),
-                p.getTalla()
-            };
-            model.addRow(fila);
+        Object[] fila = {
+            false, // Valor por defecto del checkbox
+            p.getId(),
+            p.getColor(),
+            p.getDescripcion(),
+            p.getCategoria(),
+            p.getGenero(),
+            p.getMaterial(),
+            p.getTipoPrenda(),
+            p.getPedreria(), // Ya es un String "Sí" o "No"
+            p.getPrecio(),
+            p.getTalla()
+        };
+        model.addRow(fila);
         }
 
         return model;

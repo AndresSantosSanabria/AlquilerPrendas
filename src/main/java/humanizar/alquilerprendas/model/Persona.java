@@ -6,15 +6,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
- * @author Andres Santos
+ * Clase base para Cliente y Empleado
  */
 @Entity
 @Table(name = "persona")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
-public class Persona implements Serializable {
+public abstract class Persona implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,7 @@ public class Persona implements Serializable {
     @Column(name = "telefono", length = 20)
     private String telefono;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
 
     @Column(name = "cedula", unique = true, nullable = false)
@@ -39,16 +38,10 @@ public class Persona implements Serializable {
     @Column(name = "contrasenia_hash", length = 255, nullable = false)
     private String contraseniaHash;
 
-    public Persona() {
-    }
-    @OneToOne(mappedBy = "persona")
-    private Empleado empleado;
-    
-    @OneToOne
-    @JoinColumn(name = "id_persona")
-    private Persona persona;
-    
+    // Constructor vacío requerido por JPA
+    public Persona() {}
 
+    // Constructor opcional
     public Persona(String nombre, String telefono, String email, String direccion) {
         this.nombre = nombre;
         this.telefono = telefono;
@@ -58,12 +51,12 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{"
-                + "id=" + idPersona
-                + ", nombre='" + nombre + '\''
-                + ", telefono='" + telefono + '\''
-                + ", correo='" + email + '\''
-                + ", direccion='" + direccion + '\''
-                + '}';
+        return "Persona{" +
+                "id=" + idPersona +
+                ", nombre='" + nombre + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", correo='" + email + '\'' +
+                ", direccion='" + direccion + '\'' +
+                '}';
     }
 }

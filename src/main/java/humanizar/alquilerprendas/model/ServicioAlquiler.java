@@ -1,7 +1,7 @@
 package humanizar.alquilerprendas.model;
 
-import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,31 +11,32 @@ import lombok.Setter;
  * @author Andres Santos
  */
 @Entity
+@Table(name = "servicioalquiler")
 @Getter
 @Setter
-@Table(name = "servicioalquiler")
-public class ServicioAlquiler implements Serializable {
-
+public class ServicioAlquiler {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_servicio")
     private Integer idServicio;
-
+    
+    @Column(name = "id_cliente")
+    private Integer idCliente;
+    
+    @Column(name = "id_empleado")
+    private Integer idEmpleado;
+    
+    @Column(name = "fecha_solicitud")
+    private Date fechaSolicitud;
+    
+    @Column(name = "fecha_retiro")
+    private Date fechaRetiro;
+    
     @Column(name = "fecha_devolucion")
     private Date fechaDevolucion;
 
-    @Column(name = "fecha_retiro")
-    private Date fechaRetiro;
-
-    @Column(name = "fecha_solicitud")
-    private Date fechaSolicitud;
-
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(name = "id_empleado")
-    private Empleado empleado;
-
+    // Constructor vacío
+    public ServicioAlquiler() {
+    }
 }

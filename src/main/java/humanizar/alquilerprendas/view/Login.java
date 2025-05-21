@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         
+        
     }
 LoginController login = new LoginController();
     /**
@@ -196,10 +197,14 @@ LoginController login = new LoginController();
             int validation = login.login(jUsuario.getText(), jPassword.getText());
 
             if (validation > 0) {
-                System.out.println(validation);
+                
+               login.verificarRolYRedirigir(validation);
+               
+               this.dispose();
+               /*System.out.println(validation);
                home h = new home(validation);
                h.setVisible(true);
-               this.dispose();
+               */
             } else {
                 JOptionPane.showMessageDialog(null, "El Usuario y la contraseña ingresado es incorrecto", "Advertencia", JOptionPane.WARNING_MESSAGE);
             }

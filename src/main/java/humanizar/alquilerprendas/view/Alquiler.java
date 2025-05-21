@@ -6,21 +6,27 @@ package humanizar.alquilerprendas.view;
 
 import humanizar.alquilerprendas.controller.EmpleadosController;
 import humanizar.alquilerprendas.controller.LoginController;
+import humanizar.alquilerprendas.dto.AlquilerDTO;
 import humanizar.alquilerprendas.facade.AlquilerServiceFacade;
 import humanizar.alquilerprendas.facade.UsuarioFacade;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author Andres Santos
  */
+@NoArgsConstructor
+@AllArgsConstructor
 public class Alquiler extends javax.swing.JFrame {
 
     /**
@@ -382,38 +388,28 @@ public class Alquiler extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void AlquilarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AlquilarMouseClicked
-        // Recuperar número de identificación del cliente desde el usuario logueado
-        UsuarioFacade usuarioFacade = new UsuarioFacade();
-
-        // Recuperar de la tabla el número de identificación del empleado seleccionado
+      // Obtener cédula empleado igual que antes
         int filaSeleccionada = jtEmpleados.getSelectedRow();
-        String cedulaEmpleado = null;
-
-        if (filaSeleccionada != -1) {
-            Object cedulaObj = jtEmpleados.getValueAt(filaSeleccionada, 2); // Asegúrate que es la columna correcta
-
-            if (cedulaObj != null) {
-                cedulaEmpleado = cedulaObj.toString();
-                System.out.println("Cédula del empleado seleccionado: " + cedulaEmpleado);
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "No se encontró cédula en la fila seleccionada.");
-                return;
-            }
-        } else {
+        if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(rootPane, "Debes seleccionar un empleado.");
             return;
         }
 
-        // Capturar las prendas seleccionadas
+        Object cedulaObj = jtEmpleados.getValueAt(filaSeleccionada, 2);
+        if (cedulaObj == null) {
+            JOptionPane.showMessageDialog(rootPane, "No se encontró cédula en la fila seleccionada.");
+            return;
+        }
+        String cedulaEmpleado = cedulaObj.toString();
+        System.out.println("Cédula del empleado seleccionado: " + cedulaEmpleado);
+
+        // Obtener prendas seleccionadas igual que antes
         DefaultTableModel model = (DefaultTableModel) jtPrendas.getModel();
         List<Integer> idsPrendas = new ArrayList<>();
-
         for (int i = 0; i < model.getRowCount(); i++) {
-            Boolean seleccionado = (Boolean) model.getValueAt(i, 0); // Columna del checkbox
-
+            Boolean seleccionado = (Boolean) model.getValueAt(i, 0);
             if (Boolean.TRUE.equals(seleccionado)) {
                 try {
-                    // Supongamos que el ID de la prenda está en la columna 1 (o ajusta según corresponda)
                     Integer idPrenda = Integer.parseInt(model.getValueAt(i, 1).toString());
                     idsPrendas.add(idPrenda);
                 } catch (NumberFormatException e) {
@@ -427,33 +423,67 @@ public class Alquiler extends javax.swing.JFrame {
             return;
         }
 
-        // Capturar fecha de alquiler
+        // Fechas
         Date fechaAlquiler = FechaAlquiler.getDate();
         if (fechaAlquiler == null) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fecha de alquiler.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Capturar fecha de devolución
+        // VALIDACIÓN 1: Verificar que la fecha de alquiler no sea anterior a la fecha actual
+        Date fechaActual = new Date(); // Obtiene la fecha actual
+        // Resetear la hora, minutos, segundos y milisegundos para comparar solo fechas
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(fechaActual);
+        cal1.set(Calendar.HOUR_OF_DAY, 0);
+        cal1.set(Calendar.MINUTE, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+        fechaActual = cal1.getTime();
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(fechaAlquiler);
+        cal2.set(Calendar.HOUR_OF_DAY, 0);
+        cal2.set(Calendar.MINUTE, 0);
+        cal2.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+        fechaAlquiler = cal2.getTime();
+        
+        if (fechaAlquiler.before(fechaActual)) {
+            JOptionPane.showMessageDialog(null, "La fecha de alquiler no puede ser anterior a la fecha actual.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         Date fechaDevolucion = FechaDevolucion.getDate();
         if (fechaDevolucion == null) {
             JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna fecha de devolución.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        // Normalizar la fecha de devolución para comparación
+        Calendar cal3 = Calendar.getInstance();
+        cal3.setTime(fechaDevolucion);
+        cal3.set(Calendar.HOUR_OF_DAY, 0);
+        cal3.set(Calendar.MINUTE, 0);
+        cal3.set(Calendar.SECOND, 0);
+        cal3.set(Calendar.MILLISECOND, 0);
+        fechaDevolucion = cal3.getTime();
+        
+        // VALIDACIÓN 2: Verificar que la fecha de devolución no sea anterior a la fecha de alquiler
+        if (fechaDevolucion.before(fechaAlquiler)) {
+            JOptionPane.showMessageDialog(null, "La fecha de devolución no puede ser anterior a la fecha de alquiler.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        // Llamar al servicio de alquiler
+        // Crear DTO
+        AlquilerDTO alquilerDTO = new AlquilerDTO(this.id, cedulaEmpleado, idsPrendas, fechaAlquiler, fechaDevolucion);
+
+        // Enviar DTO al facade
         AlquilerServiceFacade alquilerFacade = new AlquilerServiceFacade();
-        Integer idAlquiler = alquilerFacade.registrarAlquilerCompleto(
-                this.id,
-                cedulaEmpleado,
-                idsPrendas,
-                fechaAlquiler,
-                fechaDevolucion
-        );
+        boolean idAlquiler = alquilerFacade.registrarAlquilerCompleto(alquilerDTO);
 
-        // Mostrar resultado
-        if (idAlquiler != null) {
-            JOptionPane.showMessageDialog(null, "Alquiler registrado exitosamente. ID generado: " + idAlquiler);
+        if (idAlquiler) {
+            
             home form = new home(this.id);
             form.setVisible(true);
             this.dispose();

@@ -55,6 +55,8 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.dto.PrendaDTO.class);                
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.model.ServicioAlquiler.class);                
                 configuration.addAnnotatedClass(humanizar.alquilerprendas.model.AlquilerPrenda.class);
+                configuration.addAnnotatedClass(humanizar.alquilerprendas.model.ServicioLavanderia.class);
+
 
 
 

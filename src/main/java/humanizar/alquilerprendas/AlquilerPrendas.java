@@ -3,6 +3,7 @@
  */
 package humanizar.alquilerprendas;
 
+import humanizar.alquilerprendas.Service.LavanderiaService;
 import humanizar.alquilerprendas.view.Login;
 import javax.swing.SwingUtilities;
 
@@ -11,35 +12,30 @@ import javax.swing.SwingUtilities;
  * @author Andres Santos
  */
 public class AlquilerPrendas {
+
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new Login().setVisible(true);
-        });
-        /*Session session = null;
-        Transaction tx = null;
 
         try {
-            session = HibernateSessionManager.abrirSesion();
-            tx = session.beginTransaction();
+            System.out.println("Iniciando aplicación de alquiler de prendas...");
 
-            List<Cliente> clientes = session.createQuery("FROM Cliente", Cliente.class).list();
+            // Crear e inicializar el servicio de lavandería
+            LavanderiaService lavanderiaService = new LavanderiaService();
 
-            // Mostrar la lista de clientes
-            for (Cliente cliente : clientes) {
-                System.out.println(cliente);
-            }
-            tx.commit();
+            // Ejecutar el procesamiento de prendas para lavandería
+            System.out.println("Iniciando procesamiento de prendas para lavandería...");
+            lavanderiaService.procesarPrendasParaLavanderia();
+            System.out.println("Procesamiento de prendas para lavandería completado.");
+            
+            
+            lavanderiaService.finLavanderia();
+
+            SwingUtilities.invokeLater(() -> {
+                new Login().setVisible(true);
+            });
+
         } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
+            System.err.println("Error al iniciar la aplicación: " + e.getMessage());
             e.printStackTrace();
-        } finally {
-            HibernateSessionManager.cerrarSesion(session);
-
-        }*/
-        
-        
+        }
     }
-        
 }

@@ -25,7 +25,4 @@ public class Empleado extends Persona {
 
     @Column(name = "cargo", length = 50)
     private String cargo;
-
-    @ManyToOne
-    private Persona persona;
 }

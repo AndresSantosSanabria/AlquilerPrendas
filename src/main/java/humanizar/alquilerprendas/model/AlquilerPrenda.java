@@ -1,34 +1,36 @@
 package humanizar.alquilerprendas.model;
 
 import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  *
  * @author Andres Santos
  */
 @Entity
 @Table(name = "alquilerprenda")
+@Getter
+@Setter
 public class AlquilerPrenda {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @ManyToOne
-    @MapsId("idServicio")
+    private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_prenda")
+    private Prenda prenda;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_servicio")
     private ServicioAlquiler servicioAlquiler;
 
-    @ManyToOne
-    @MapsId("idPrenda")
-    @JoinColumn(name = "id_prenda")
-    private Prenda prenda;
-
-    // constructores, getters y setters
     public AlquilerPrenda() {
     }
 
-    public AlquilerPrenda(ServicioAlquiler servicioAlquiler, Prenda prenda) {
-        this.servicioAlquiler = servicioAlquiler;
+    public AlquilerPrenda(ServicioAlquiler servicio, Prenda prenda) {
+        this.servicioAlquiler = servicio;
         this.prenda = prenda;
     }
 }

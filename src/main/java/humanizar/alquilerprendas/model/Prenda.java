@@ -48,6 +48,9 @@ public class Prenda {
 
     @Column(name = "pedreria")
     private Boolean pedreria;
+    
+    @Column (name = "esta_alquilada")
+    private Boolean alquilada;
 
     @ManyToOne
     @JoinColumn(name = "id_genero", referencedColumnName = "id_genero")
